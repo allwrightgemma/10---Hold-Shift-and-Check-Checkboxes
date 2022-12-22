@@ -11,6 +11,14 @@
         background: #ffc600;
       }
 
+      .select-all {
+        max-width: 400px;
+        margin: 50px auto;
+        background: white;
+        border-radius: 5px;
+        box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+      }
+
       .inbox {
         max-width: 400px;
         margin: 50px auto;
@@ -29,7 +37,7 @@
         border-bottom: 0;
       }
 
-      input:checked + p {
+      .inbox input:checked + p {
         background: #f9f9f9;
         text-decoration: line-through;
       }
@@ -55,6 +63,12 @@
    When a user clicks a checkbox, holds Shift, and then clicks another checkbox a few rows down, all the checkboxes inbetween those two checkboxes should be checked.
 
   -->
+    <div class="select-all">
+      <div class="item">
+        <input type="checkbox" />
+        <p>Select All</p>
+      </div>
+    </div>
     <div class="inbox">
       <div class="item">
         <input type="checkbox" />
@@ -96,24 +110,23 @@
 
     <script>
       const checkboxes = document.querySelectorAll(
-        '.inbox input[type="checkbox"]'
+        ".inbox input[type='checkbox']"
       );
-
       let lastChecked = null;
 
       function handleCheck(e) {
         let inBetween = false;
         if (e.shiftKey && this.checked) {
           checkboxes.forEach((checkbox) => {
-            if (checkbox === this || checkbox === lastChecked) {
+            if (checkbox === lastChecked || checkbox === this) {
               inBetween = !inBetween;
             }
-
             if (inBetween) {
               checkbox.checked = true;
             }
           });
         }
+
         lastChecked = this;
       }
 
