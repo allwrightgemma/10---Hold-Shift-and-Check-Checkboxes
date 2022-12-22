@@ -112,6 +112,9 @@
       const checkboxes = document.querySelectorAll(
         ".inbox input[type='checkbox']"
       );
+      const selectAll = document.querySelector(
+        '.select-all input[type="checkbox"]'
+      );
       let lastChecked = null;
 
       function handleCheck(e) {
@@ -130,9 +133,23 @@
         lastChecked = this;
       }
 
+      function handleSelectAll(e) {
+        if (this.checked === true) {
+          checkboxes.forEach((checkbox) => {
+            checkbox.checked = true;
+          });
+        } else {
+          checkboxes.forEach((checkbox) => {
+            checkbox.checked = false;
+          });
+        }
+      }
+
       checkboxes.forEach((checkbox) =>
         checkbox.addEventListener("click", handleCheck)
       );
+
+      selectAll.addEventListener("click", handleSelectAll);
     </script>
   </body>
 </html>
